@@ -1,0 +1,37 @@
+.container-per {
+    background-color: #b7b6f7; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    padding: 20px; /* Espaciado interno */
+    max-width: 400px; /* Ancho máximo */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+h1 {
+    text-align: center; /* Centrar título */
+    color: #343a40; /* Color gris oscuro */
+    margin-bottom: 20px; /* Margen inferior */
+}
+.form-group label {
+    color: #343a40; /* Color gris oscuro */
+}
+.form-control {
+    background-color: #f2f2f2; /* Fondo gris claro */
+    color: #343a40; /* Color gris oscuro */
+    border: none; /* Borde transparente */
+}
+.form-control:focus {
+    background-color: #e5e5e5; /* Fondo gris más claro cuando está enfocado */
+    color: #343a40; /* Color gris oscuro */
+}
+.btn-primary {
+    background-color: #007bff; /* Azul primario */
+    border: none; /* Borde transparente */
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro al hacer hover */
+}
+
+.icon {
+    font-size: 2em; /* Tamaño del icono */
+    color: #343a40; /* Color gris oscuro */
+}

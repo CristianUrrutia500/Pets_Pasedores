@@ -1,0 +1,42 @@
+/* Estilo personalizado */
+.categoria {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    /* Elimina el subrayado del enlace */
+}
+
+.categoria:hover {
+    opacity: 0.8;
+    /* Cambia la opacidad al pasar el ratón sobre el enlace */
+}
+
+.categoria i {
+    margin-right: 10px;
+}
+
+.titulo {
+    text-align: center;
+    /* Centra el texto */
+}
+
+/* Colores de las categorías */
+.mi-perfil {
+    background-color: #6BFFB8;
+    /* Verde claro */
+}
+
+.sobre-horarios {
+    background-color: #FF6B6B; /* Rojo */
+}
+
+
+.reserva {
+    background-color: #FFD56B; /* Amarillo */
+}

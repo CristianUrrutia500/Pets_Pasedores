@@ -1,0 +1,19 @@
+.container-per {
+    background-color: #f2f2f2cc; /* Fondo gris suave */
+}
+.card {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: transform 0.3s; /* Transición suave al hacer hover */
+}
+.card:hover {
+    transform: translateY(-5px); /* Levantar la tarjeta al hacer hover */
+}
+.card-title {
+    color: #212529; /* Color del título */
+    font-weight: bold; /* Negrita */
+}
+.card-text {
+    color: #6c757d; /* Color del texto */
+}

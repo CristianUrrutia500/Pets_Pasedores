@@ -1,0 +1,74 @@
+.paseador-item {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #d6f5f5;
+    /* Celeste claro */
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.paseador-item:hover {
+    background-color: #aeeaea;
+    /* Cambio de color al hacer hover */
+}
+
+.paseador-img {
+    width: 120px;
+    /* Aumento del tamaño de la imagen */
+    height: 120px;
+    /* Aumento del tamaño de la imagen */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.paseador-details {
+    flex-grow: 1;
+}
+
+.paseador-details .h5 {
+    margin-bottom: 5px;
+    /* Ajuste del margen inferior del título */
+    color: #333;
+    /* Color del texto del título */
+}
+
+.paseador-details .parrafo {
+    margin-bottom: 5px;
+    /* Ajuste del margen inferior de los párrafos */
+    color: #666;
+    /* Color del texto de los párrafos */
+}
+
+.titulo {
+    text-align: left;
+    margin-bottom: 20px; /* Agregamos un margen inferior al título */
+}
+
+.buscador-form {
+    display: flex; /* Cambiamos a un contenedor flexible */
+    align-items: center; /* Alineamos los elementos verticalmente */
+}
+
+.buscador-input {
+    flex: 1; /* Permitimos que el campo de entrada ocupe el espacio restante */
+    width: auto; /* Quitamos el ancho fijo para que se ajuste automáticamente */
+    margin-right: 10px; /* Añadimos un margen derecho entre el campo de entrada y el botón */
+}
+
+.buscador-btn {
+    margin-top: 0; /* Eliminamos el margen superior para que esté alineado verticalmente */
+}
+
+.link-plain {
+    text-decoration: none; /* Quitar subrayado */
+    color: inherit; /* Heredar el color del texto */
+}
+
+.link-plain:hover, .link-plain:focus {
+    color: inherit; /* Mantener el color del texto al hacer hover o focus */
+    text-decoration: none;
+}
