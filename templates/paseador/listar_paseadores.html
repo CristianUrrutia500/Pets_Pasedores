@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+    Paseadores
+{% endblock titulo %}
+
+{% block css %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static "paseador_lista/style.css" %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="container mt-4 layout_padding layout_padding-bottom">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="display-4 titulo">Lista de Paseadores</h1>
+                </div>
+                <div class="col-md-6">
+                    <!-- Formulario del buscador -->
+                    <form method="GET" action="" class="buscador-form">
+                        <div class="form-group">
+                            <label for="comuna">Buscar por comuna:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control buscador-input" id="comuna" name="comuna" placeholder="Ingrese la comuna">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary buscador-btn">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% for paseador in paseadores %}
+        <a href="{% url "cliente:info-paseador" paseador.id %}" class="link-plain">
+            <div class="paseador-container">
+                <div class="paseador-item">
+                    {% if paseador.foto_perfil %}
+                        <img src="{{paseador.foto_perfil.url}}" alt="Foto de Paseador 1" class="paseador-img">
+                    {% else %}
+                        <img src="{% static "paseador_lista/usuario_default.jpg" %}" alt="Foto de Paseador " class="paseador-img">
+                    {% endif %}
+                    <div class="paseador-details">
+                        <h5>{{paseador.first_name}} {{paseador.last_name}}</h5>
+                        <p class="parrafo">Comuna: {{paseador.comuna}}</p>
+
+                        <p class="parrafo">Dias disponibles: 
+                            {% for dia in paseador.dias_disponibles %}
+                                <span>{{ dia }}</span>{% if not forloop.last %}-{% endif %}
+                            {% endfor %}
+                        </p>
+                        <p class="parrafo">Maximo de mascotas por paseo: {{paseador.cantidad_mascotas}}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        
+    </div>
+{% endblock contenido %}
+
+{% block js %}
+
+{% endblock js %}

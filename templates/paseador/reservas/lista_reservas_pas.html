@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+Solicitudes de {{user.username}}
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+{% endblock css %}
+
+{% block contenido %}
+    <div class="container mt-5">
+        <h1>Solicitudes de Reservas</h1>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>Información (Dueño - Mascota)</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in reservas_paseador %}
+                {% if solicitud.estado == 'pendiente' %}
+                    <tr>
+                        <td>
+                            <p><strong>{{ solicitud.mascota.duenno.first_name }} {{ solicitud.mascota.duenno.last_name }} {{ solicitud.mascota.nombre }}</strong>
+                        </td>
+                        <td>
+                            <p>{{ solicitud.fecha_paseo }}
+                        </td>
+                        <td>
+                            <p>{{ solicitud.horario_paseo.hora_inicio }}
+                        </td>
+                        <td>
+                            {{ solicitud.precio }}
+                        </td>
+                        <td>
+                            <span class="badge badge-warning">{{solicitud.estado}}</span>
+                        </td>
+                        <td>
+                            <a href="{% url "solicitud-reserva" solicitud.id %}" class="btn btn-outline-dark">Detalles</a>
+                        </td>
+                    </tr>
+                {% elif  solicitud.estado == 'aceptada' %}
+                    <tr>
+                        <td>
+                            <p><strong>{{ solicitud.mascota.duenno.first_name }} {{ solicitud.mascota.duenno.last_name }} {{ solicitud.mascota.nombre }}</strong>
+                        </td>
+                        <td>
+                            <p>{{ solicitud.fecha_paseo }}
+                        </td>
+                        <td>
+                            <p>{{ solicitud.horario_paseo.hora_inicio }}
+                        </td>
+                        <td>
+                            {{ solicitud.precio }}
+                        </td>
+                        <td>
+                            <span class="badge badge-success">{{solicitud.estado}}</span>
+                        </td>
+                        <td>
+                            <a href="{% url "solicitud-reserva" solicitud.id %}" class="btn btn-outline-dark">Detalles</a>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock contenido %}
+
+{% block js %}
+
+{% endblock js %}
+
+
+
+{% comment %} <td>
+    <span class="badge badge-danger">{{solicitud.estado}}</span>
+</td> {% endcomment %}

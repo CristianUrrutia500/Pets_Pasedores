@@ -1,0 +1,131 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+Solicitudes de {{user.username}}
+{% endblock titulo %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card-body {
+            padding: 20px;
+        }
+        .card-text {
+            margin-bottom: 15px;
+        }
+        .info-section {
+            margin-bottom: 30px;
+        }
+        .info-title {
+            margin-bottom: 10px;
+        }
+        .card-body img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Ajusta este valor para redondeo de esquinas */
+            border: 2px solid #dee2e6; /* Borde de la imagen */
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        .btn-aceptar {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-rechazar {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock css %}
+
+{% block contenido %}
+    <div class="container mt-4 layout_padding-bottom">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Detalles de la Reserva</h3>
+            </div>
+            <div class="card-body d-flex">
+                <div class="w-75">
+                    <div class="info-section">
+                        <h5 class="card-title info-title">Información de la Mascota</h5>
+                        <p class="card-text">
+                            <strong>Nombre:</strong> {{ reserva.mascota.nombre }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Tamaño:</strong> {{ reserva.mascota.tamanno }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Dueño:</strong> {{ reserva.mascota.duenno.first_name }} {{ reserva.mascota.duenno.last_name }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Dirección del Dueño:</strong> {{ reserva.mascota.duenno.direccion }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Teléfono del Dueño:</strong> {{ reserva.mascota.duenno.telefono }}
+                        </p>
+                    </div>
+                    <div class="info-section">
+                        <h5 class="card-title info-title">Información de la Reserva</h5>
+                        <p class="card-text">
+                            <strong>Fecha de Paseo:</strong> {{ reserva.horario_paseo.dia }} {{ reserva.fecha_paseo }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Día:</strong> {{ reserva.horario_paseo.dia }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Hora de Inicio:</strong> {{ reserva.horario_paseo.hora_inicio }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Hora de Finalizacion:</strong> {{ reserva.horario_paseo.hora_fin }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Precio:</strong> {{ reserva.precio }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Estado:</strong>
+                            {% if reserva.estado == 'pendiente' %}
+                                <span class="badge badge-warning">Pendiente</span>
+                            {% elif reserva.estado == 'aceptada' %}
+                                <span class="badge badge-success">Aceptada</span>
+                            {% else %}
+                                <span class="badge badge-danger">Rechazada</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <div class="w-25 text-center">
+                    {% if reserva.mascota.foto %}
+                        <img src="{{ reserva.mascota.foto.url }}" class="img-fluid" alt="Imagen de {{ reserva.mascota.nombre }}">
+                    {% else %}
+                        <img src="{% static 'mascotas/perro_default.png' %}" class="img-fluid" alt="Imagen predeterminada">
+                    {% endif %}
+                    {% if reserva.estado == 'pendiente' %}
+                        <div class="btn-container">
+                            <a href="#" onclick="confirmarAccion('{% url "aceptar-reserva" reserva.id  %}')" class="btn btn-aceptar">Aceptar</a>
+                            <a href="#" onclick="confirmarAccion('{% url "rechazar-reserva" reserva.id %}')" class="btn btn-rechazar">Rechazar</a>
+                        </div>
+                    {% else %}
+                        <div class="btn-container">
+                            <a href="#" onclick="confirmarAccion('{% url "cancelar-reserva-paseador" reserva.id %}')" class="btn btn-rechazar">Cancelar Reserva</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}
+
+{% block js %}
+    <script>
+        function confirmarAccion(url) {
+            if (confirm("¿Estás seguro de querer realizar esta acción?")) {
+                window.location.href = url; // Redirige a la URL correspondiente
+            }
+        }
+    </script>
+{% endblock js %}

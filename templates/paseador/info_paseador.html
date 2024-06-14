@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+    Paseador {{paseador.first_name}}
+{% endblock titulo %}
+
+{% block contenido %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <!-- Foto de perfil grande -->
+            {% if paseador.foto_perfil %}
+                <img src="{{ paseador.foto_perfil.url }}" class="img-fluid" alt="Foto de perfil">
+            {% else %}
+                <img src="{% static "paseador_lista/usuario_default.jpg" %}" class="img-fluid" alt="Foto de perfil">
+            {% endif %}
+            <!-- Cuadro suave para la descripción -->
+            <div class="mt-3 p-3 bg-light rounded">
+                <p class="text-muted">{{ paseador.descripcion }}</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!-- Información personal -->
+            <h2>{{ paseador.first_name }} {{ paseador.last_name }}</h2>
+            <p><strong>Correo electrónico:</strong> {{ paseador.email }}</p>
+            <p><strong>Teléfono:</strong> {{ paseador.telefono }}</p>
+            <p><strong>Comuna:</strong> {{ paseador.comuna }}</p>
+            <p><strong>Cantidad máxima de mascotas por paseo:</strong> {{ paseador.cantidad_mascotas }}</p>
+            <p><strong>Horarios Disponibles:</strong></p>
+            <!-- Aquí puedes agregar más campos de información personal según tu modelo de Paseador -->
+
+            <!-- Tablas de horarios -->
+            {% for item in horarios_para_template %}
+                <h3>{{ item.dia }}</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Hora de inicio</th>
+                            <th scope="col">Hora de fin</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for horario in item.horarios %}
+                            <tr>
+                                <td>{{ horario.1 }}</td>
+                                <td>{{ horario.2 }}</td>
+                                <td><a href="{% url "registro-reserva" horario.0 %}" class="btn btn-outline-dark">Reservar</a></td>                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block js %}
+
+{% endblock js %}

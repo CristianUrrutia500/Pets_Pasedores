@@ -1,0 +1,104 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+Paseador {{user.username}}
+{% endblock titulo %}
+
+{% block css %}
+
+
+{% endblock css %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title text-center">Perfil de Usuario</h5>
+                </div>
+                <div class="card-body">
+                    {% if paseador.foto_perfil %}
+                        <img src="{{paseador.foto_perfil.url}}" class="img-fluid rounded-circle mx-auto d-block mb-3">
+                    {% else %}
+                        <img src="{% static "paseador_lista/usuario_default.jpg" %}" class="img-fluid rounded-circle mx-auto d-block mb-3" >
+                    {% endif %}
+                    <h6 class="text-center">{{paseador.first_name}} {{paseador.last_name}}</h6>
+                    <p class="text-center">Descripción breve sobre mí.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Edad: {{paseador.edad}}</li>
+                        <li class="list-group-item">Ciudad: Santiago de chile</li>
+                        <li class="list-group-item">Comuna: {{paseador.comuna}}</li>
+                        <li class="list-group-item">Email: {{paseador.email}}</li>
+                        <li class="list-group-item">Teléfono: {{paseador.telefono}}</li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal">
+                    Editar Perfil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalTitle">Editar Perfil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'paseador:update_profile' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="inputNombre">Nombre</label>
+                        <input type="text" class="form-control" id="inputNombre" name="first_name" value="{{ paseador.first_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputApellido">Apellido</label>
+                        <input type="text" class="form-control" id="inputApellido" name="last_name" value="{{ paseador.last_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEdad">Edad</label>
+                        <input type="number" class="form-control" id="inputEdad" name="edad" value="{{ paseador.edad }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputComuna">Comuna</label>
+                        <input type="text" class="form-control" id="inputComuna" name="comuna" value="{{ paseador.comuna }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDireccion">Dirección</label>
+                        <input type="text" class="form-control" id="inputDireccion" name="direccion" value="{{ paseador.direccion }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTelefono">Teléfono</label>
+                        <input type="text" class="form-control" id="inputTelefono" name="telefono" value="{{ paseador.telefono }}">
+                    </div>
+                   
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}
+
+{% block js %}
+<script>
+    // Agrega los scripts de Bootstrap para activar el modal
+    $(document).ready(function(){
+        $('#editProfileModal').on('shown.bs.modal', function () {
+            // Coloca el foco en el primer campo del formulario cuando se muestra el modal
+            $('#inputNombre').trigger('focus');
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+{% endblock js %}

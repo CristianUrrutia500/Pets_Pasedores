@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+Paseador {{user.username}}
+{% endblock titulo %}
+
+{% block css %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!-- Enlace a Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<link rel="stylesheet" href="{% static "paseador/interfaz/style.css" %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="row">
+        <div class="col">
+            <!-- Div principal -->
+            <div class="jumbotron">
+                <h1 class="display-4 titulo">Hola {{user.username}}</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{% url "paseador:perfil-paseador" %}" class="categoria mi-perfil">
+                            <i class="fas fa-user"></i> Mi Perfil
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url "paseador:listar-horario" %}" class="categoria sobre-horarios">
+                            <i class="fas fa-clock"></i>Tus horarios
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url "lista-reservas-paseador" %}" class="categoria reserva">
+                            <i class="far fa-calendar-check"></i>Solicitudes Reservas ({{cantidad_solicitudes}})
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+{% endblock js %}
